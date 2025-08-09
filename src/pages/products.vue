@@ -30,7 +30,10 @@ function addToCart(product: Product) {
             {{ product.emoji }}
           </span>
         </div>
-        <div class="product-price">{{ product.price }}€</div>
+        <div class="product-price">
+          <span> {{ product.price }}€ </span>
+          <span>{{ cartStore.getQuantityById(product.id) }} </span>
+        </div>
       </button>
     </div>
     <CartFloating />
