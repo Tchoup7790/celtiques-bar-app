@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { router } from '../router'
 import { useCartStore } from '../store/cartStore'
 
 const cartStore = useCartStore()
@@ -80,14 +81,22 @@ const cartStore = useCartStore()
       <button
         class="btn-primary"
         style="margin-top: 1rem; width: 100%"
-        @click="cartStore.clearCart()"
+        @click="router.push('/payement')"
       >
-        Vider le panier
+        Payement en espèce
       </button>
     </div>
 
-    <router-link to="/" style="display: block; margin-top: 1rem; text-align: center">
-      Retour aux produits
+    <router-link
+      to="/"
+      @click="
+        () => {
+          cartStore.clearCart()
+        }
+      "
+      style="display: block; margin-top: 1rem; text-align: center"
+    >
+      Vider le panier
     </router-link>
   </div>
 </template>
