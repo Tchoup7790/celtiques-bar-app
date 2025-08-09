@@ -8,7 +8,7 @@
 
     <div style="margin-bottom: 1rem">
       <label for="paymentInput"><strong>Montant reçu (€) :</strong></label>
-      <input type="tel" inputmode="decimal" pattern="[0-9]+([.,][0-9]{1,2})?" step="0.01" />
+      <input type="text" inputmode="decimal" pattern="[0-9]+([.,][0-9]{0,2})?" />
     </div>
 
     <div style="margin-top: 0.5rem">
