@@ -1,16 +1,3 @@
-<script setup lang="ts">
-import { SpaceName, useProductsStore, type Product } from '../store/productsStore'
-import { useCartStore } from '../store/cartStore'
-import CartFloating from '../components/cart-floating.vue'
-
-const productsStore = useProductsStore()
-const cartStore = useCartStore()
-
-function addToCart(product: Product) {
-  cartStore.addItem(product)
-}
-</script>
-
 <template>
   <div class="container">
     <div class="product-title">
@@ -49,3 +36,16 @@ function addToCart(product: Product) {
     <CartFloating />
   </div>
 </template>
+
+<script setup lang="ts">
+import { SpaceName, useProductsStore, type Product } from '../store/productsStore'
+import { useCartStore } from '../store/cartStore'
+import CartFloating from '../components/cart-floating.vue'
+
+const productsStore = useProductsStore()
+const cartStore = useCartStore()
+
+function addToCart(product: Product) {
+  cartStore.addItem(product)
+}
+</script>

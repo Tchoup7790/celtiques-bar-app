@@ -87,15 +87,18 @@ button:active {
 }
 
 .payements-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  /* bloque le retour à la ligne */
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
 }
 
-@media (max-width: 320px) {
-  .payements-grid {
-    grid-template-columns: 1fr;
-  }
+.payements-grid-inner {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(3, auto);
+  gap: 1rem;
 }
 
 .product-name {

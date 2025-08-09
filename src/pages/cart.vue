@@ -1,10 +1,3 @@
-<script setup lang="ts">
-import { router } from '../router'
-import { useCartStore } from '../store/cartStore'
-
-const cartStore = useCartStore()
-</script>
-
 <template>
   <div class="container">
     <h1>Panier</h1>
@@ -100,3 +93,10 @@ const cartStore = useCartStore()
     </router-link>
   </div>
 </template>
+
+<script setup lang="ts">
+import { router } from '../router'
+import { useCartStore } from '../store/cartStore'
+
+const cartStore = useCartStore()
+</script>

@@ -1,3 +1,66 @@
+<template>
+  <div class="container">
+    <h1>Paiement</h1>
+
+    <div style="margin-bottom: 10px">
+      <strong>Total du panier : </strong>{{ (totalCents / 100).toFixed(2) }} €
+    </div>
+
+    <div class="payements-grid">
+      <div class="payements-grid-inner">
+        <div
+          class="btn-secondary"
+          v-for="denom in denominations"
+          :key="denom.label"
+          style="text-align: center; border-radius: 12px; width: 150px"
+        >
+          <div style="font-weight: bold; margin-bottom: 0.3rem">{{ denom.label }}</div>
+          <button
+            class="btn-primary"
+            style="margin-right: 0.5rem"
+            @click="removeDenomination(denom.label)"
+            :disabled="receivedQuantities[denom.label] === 0"
+          >
+            -
+          </button>
+
+          <button @click="addDenomination(denom.label)" class="btn-primary">+</button>
+
+          <div style="margin-top: 0.3rem">x {{ receivedQuantities[denom.label] }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 0.5rem">
+      <strong>Total reçu : </strong>{{ (totalReceived / 100).toFixed(2) }} €
+    </div>
+
+    <div style="margin-top: 0.5rem">
+      <strong>Monnaie à rendre : </strong>
+      <span v-if="changeCents >= 0">{{ (changeCents / 100).toFixed(2) }} €</span>
+      <span v-else style="color: red">
+        Paiement insuffisant (il manque {{ (-changeCents / 100).toFixed(2) }} €)
+      </span>
+    </div>
+    <button
+      class="btn-primary"
+      style="margin-top: 1rem; width: 100%"
+      @click="
+        () => {
+          cartStore.clearCart()
+          router.push('/')
+        }
+      "
+    >
+      Vider le panier
+    </button>
+
+    <router-link to="/cart" style="display: block; margin-top: 1rem; text-align: center">
+      Retour au panier
+    </router-link>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useCartStore } from '../store/cartStore'
@@ -53,64 +116,3 @@ function removeDenomination(label: string) {
   }
 }
 </script>
-
-<template>
-  <div class="container">
-    <h1>Paiement</h1>
-
-    <div style="margin-bottom: 10px">
-      <strong>Total du panier : </strong>{{ (totalCents / 100).toFixed(2) }} €
-    </div>
-
-    <div class="payements-grid">
-      <div
-        class="btn-secondary"
-        v-for="denom in denominations"
-        :key="denom.label"
-        style="padding: 0.5rem; text-align: center; border-radius: 12px"
-      >
-        <div style="font-weight: bold; margin-bottom: 0.3rem">{{ denom.label }}</div>
-        <button
-          class="btn-primary"
-          style="margin-right: 0.5rem"
-          @click="removeDenomination(denom.label)"
-          :disabled="receivedQuantities[denom.label] === 0"
-        >
-          -
-        </button>
-
-        <button @click="addDenomination(denom.label)" class="btn-primary">+</button>
-
-        <div style="margin-top: 0.3rem">x {{ receivedQuantities[denom.label] }}</div>
-      </div>
-    </div>
-
-    <div style="margin-top: 1.5rem">
-      <strong>Total reçu : </strong>{{ (totalReceived / 100).toFixed(2) }} €
-    </div>
-
-    <div style="margin-top: 0.5rem">
-      <strong>Monnaie à rendre : </strong>
-      <span v-if="changeCents >= 0">{{ (changeCents / 100).toFixed(2) }} €</span>
-      <span v-else style="color: red">
-        Paiement insuffisant (il manque {{ (-changeCents / 100).toFixed(2) }} €)
-      </span>
-    </div>
-    <button
-      class="btn-primary"
-      style="margin-top: 1rem; width: 100%"
-      @click="
-        () => {
-          cartStore.clearCart()
-          router.push('/')
-        }
-      "
-    >
-      Vider le panier
-    </button>
-
-    <router-link to="/cart" style="display: block; margin-top: 1rem; text-align: center">
-      Retour au panier
-    </router-link>
-  </div>
-</template>
