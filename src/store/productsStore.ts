@@ -34,7 +34,7 @@ export const useProductsStore = defineStore('products', {
       { id: '10', name: 'Gobelet', price: 1, emoji: '🪙' },
       { id: '11', name: 'Pichet', price: 2, emoji: '💶' },
       { id: '12', name: 'Gobelet Rendu', price: -1, emoji: '🪙' },
-      { id: '13', name: 'Pichet', price: -2, emoji: '💶' }
+      { id: '13', name: 'Pichet Rendu', price: -2, emoji: '💶' }
     ] as Product[],
     spaceName: SpaceName.DRINK as SpaceName
   }),
@@ -58,7 +58,9 @@ export const useProductsStore = defineStore('products', {
 
         // 🪙 Consigne
         { id: '10', name: 'Gobelet', price: 1, emoji: '🪙' },
-        { id: '11', name: 'Pichet', price: 2, emoji: '💶' }
+        { id: '11', name: 'Pichet', price: 2, emoji: '💶' },
+        { id: '12', name: 'Gobelet Rendu', price: -1, emoji: '🪙' },
+        { id: '13', name: 'Pichet Rendu', price: -2, emoji: '💶' }
       ]
       this.products = [...this.products, ...drink]
     },
