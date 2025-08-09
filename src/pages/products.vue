@@ -16,12 +16,12 @@ function addToCart(product: Product) {
     <div class="product-title">
       <h1>
         Les Celtiques -
-        {{ productsStore.spaceName === SpaceName.DRINK ? 'Bar' : 'Crêpes / Grillades' }}
+        {{ productsStore.spaceName === SpaceName.DRINK ? 'Bar' : 'Crêpes & Grillades' }}
       </h1>
 
       <button class="btn-secondary" @click="productsStore.switchSpace()">
         Aller à l'espace
-        {{ productsStore.spaceName === SpaceName.FOOD ? 'Bar' : 'Crêpes / Grillades' }}
+        {{ productsStore.spaceName === SpaceName.FOOD ? 'Bar' : 'Crêpes & Grillades' }}
       </button>
     </div>
     <div class="products-grid">
