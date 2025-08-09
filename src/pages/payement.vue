@@ -6,14 +6,15 @@
       <strong>Total du panier : </strong>{{ (totalCents / 100).toFixed(2) }} €
     </div>
 
-    <div style="margin-bottom: 1rem">
+    <div style="margin-bottom: 1rem; display: inline-flex">
       <label for="paymentInput"><strong>Montant reçu (€) :</strong></label>
       <input
-        v-model="amountReceivedEuros"
+        id="paymentInput"
         type="text"
         inputmode="decimal"
         pattern="[0-9]+([.,][0-9]{0,2})?"
         placeholder="0,00"
+        v-model="inputValue"
       />
     </div>
 
@@ -49,17 +50,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useCartStore } from '../store/cartStore'
 import { router } from '../router'
 
 const cartStore = useCartStore()
 const totalCents = computed(() => Math.round(cartStore.total * 100))
 
-// Montant reçu en euros
+// Valeur tapée par l'utilisateur (string)
+const inputValue = ref('')
+
+// Montant reçu en euros (number)
 const amountReceivedEuros = ref(0)
 
-// Conversion en centimes pour le calcul
+// Met à jour amountReceivedEuros à chaque frappe
+watch(inputValue, (val) => {
+  const numeric = parseFloat(val.replace(',', '.'))
+  amountReceivedEuros.value = isNaN(numeric) ? 0 : numeric
+})
+
+// Conversion en centimes
 const totalReceived = computed(() => Math.round(amountReceivedEuros.value * 100))
 
 // Monnaie à rendre
