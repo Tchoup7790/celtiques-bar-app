@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useProductsStore, type Product } from '../store/productsStore'
+import { SpaceName, useProductsStore, type Product } from '../store/productsStore'
 import { useCartStore } from '../store/cartStore'
 import CartFloating from '../components/cart-floating.vue'
 
@@ -13,7 +13,17 @@ function addToCart(product: Product) {
 
 <template>
   <div class="container">
-    <h1>Les Celtiques - BAR</h1>
+    <div class="product-title">
+      <h1>
+        Les Celtiques -
+        {{ productsStore.spaceName === SpaceName.DRINK ? 'Bar' : 'Crêpes / Grillades' }}
+      </h1>
+
+      <button class="btn-secondary" @click="productsStore.switchSpace()">
+        Aller à l'espace
+        {{ productsStore.spaceName === SpaceName.FOOD ? 'Bar' : 'Crêpes / Grillades' }}
+      </button>
+    </div>
     <div class="products-grid">
       <button
         v-for="product in productsStore.products"
