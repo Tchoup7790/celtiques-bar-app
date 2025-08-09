@@ -8,7 +8,13 @@
 
     <div style="margin-bottom: 1rem">
       <label for="paymentInput"><strong>Montant reçu (€) :</strong></label>
-      <input type="text" inputmode="decimal" pattern="[0-9]+([.,][0-9]{0,2})?" />
+      <input
+        v-model="amountReceivedEuros"
+        type="text"
+        inputmode="decimal"
+        pattern="[0-9]+([.,][0-9]{0,2})?"
+        placeholder="0,00"
+      />
     </div>
 
     <div style="margin-top: 0.5rem">
